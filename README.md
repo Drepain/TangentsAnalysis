@@ -5,8 +5,8 @@ Realizado no âmbito da UC TDV.
 
 ## Membros do grupo
 
-Francisco Gomes - 27941
-Jorge Costa - 27923
+Francisco Gomes - 27941;
+Jorge Costa - 27923;
 
 ## Descrição do Jogo
 
@@ -37,3 +37,16 @@ As classes principais deste projeto estão divididas em 3 categorias:
  [^1]: Como as classes herdeiras controlam sprites de circunferencias, faz sentido ter uma propriedade deste tipo.
 
  ### `Circle.cs`
+  Uma classe herdada de `Entity.cs` que controla a maior parte dos aspetos dos circulos que o jogador tem que orbitar. Esta classe tem todas as propriedades da sua classe abstrata, assim como:
+   - a velocidade a que atravessa a tela (`speed`)
+   - uma variavel para verificar se o player está a orbitar o circulo (`PlayerAttached`)
+
+> [!NOTE]
+> `PlayerAttached` é do tipo [event](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/events/). Penso que seria possível substituir esta implementação por uma do tipo [bool](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool), sendo que a maioria dos métodos em que esta variavel é usada podia, também, um bool ser usado num contexto semelhante.
+
+  Esta classe também apresenta os seus próprios métodos com relevância:
+   - `OnPlayerAttached`: verifica se o player está a orbitar o circulo;
+   - `HandleCollision`: quando o player se lança para o próximo circulo, este método verifica se o player está na distância de colisão do circulo, aumentando, ou não, o score devidamente;
+
+### `Player.cs`
+  Uma classe herdada de `Entity.cs` que controla a maior parte dos aspetos do circulo controlado pelo jogador.
