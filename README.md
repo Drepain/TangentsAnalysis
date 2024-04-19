@@ -23,7 +23,7 @@ Tangents é um jogo multiplataforma, sendo suportado em todos os principais sist
 As classes principais deste projeto estão divididas em 3 categorias:
  - **GameObjects** - Contem as classes mais relevantes aos objetos principais do jogo e da gameplay em si (o player, os circulos, etc.);
  - **GameState** - Contem as classes que controlam o estado do jogo (menus e interações que podem levar a menus)
- - **Managers** - Estas classes servem para, como o nome indica, gerenciar o jogo, no sentido de controlar os aspetos principais da aplicação em si (input, score, etc.)
+ - **Managers** - Estas classes servem para, como o nome indica, gerir o jogo, no sentido de controlar os aspetos principais da aplicação em si (input, score, etc.)
 
  ## GameObjects
   ### `Entity.cs`
@@ -62,7 +62,7 @@ As classes principais deste projeto estão divididas em 3 categorias:
   A classe que é responsável por métodos e propriedades de texto. Estas não têm muito de interesse e são padrão para a maioria de aplicações (centrar texto, fonte, etc.)
 
   > [!NOTE]
-  > Faria bastante sentido esta classe fazer parte da categoria **Managers**, sendo que a classe não faz muito por si, mas gerência uma parte mais geral da aplicação em si.
+  > Faria bastante sentido esta classe fazer parte da categoria **Managers**, sendo que a classe não faz muito por si, mas gere uma parte mais geral da aplicação em si.
 
  ## GameState
   ### `GameState.cs`
@@ -70,7 +70,7 @@ As classes principais deste projeto estão divididas em 3 categorias:
    - O tamanho/resolução da janela (`width` e `height`)
    - uma interação com o GameStateManager (`gameStateManager`)
 
-  ### `GameOverState`
+  ### `GameOverState.cs`
   Esta classe é herdeira da classe `GameState.cs`, ela é ativada quando o player vai para fora da tela, causando um Game Over. Esta 'state' cria uma tela onde são denotadas as seguintes características:
    - uma opção para recomeçar o jogo (`playAgain`)
    - uma opção para voltar para o menu (`returnTitle`)
@@ -100,3 +100,24 @@ As classes principais deste projeto estão divididas em 3 categorias:
    - se um botão do mouse foi clicado (ou se o ecrã foi tocado, no caso de mobile)
    - se o player está na distância necessária para orbitar um circulo
    - se o player saiu da tela
+
+ ## Managers
+  ### `AssetManager.cs`
+  Uma classe que tem como objetivo disponibilizar e gerir os assets do jogo. Estes incluem:
+   - a imagem de fundo (`BG`)
+   - o sprite do circulo e do player (`Circle` e `Player`)
+   - as fontes utilizadas no jogo (`Header` e `SubHeader`)
+
+  ### `GameStateManager.cs`
+  A classe que gere os estados apresentados em **GameStates**. Ele mantem em conta:
+   - a sessão do jogo atual (`instance`)
+   - o estado presente do jogo (`currentGameState`)
+   - o estado anterior do jogo (`prevGameState`)
+
+  ### `InputManager.cs`
+  Esta classe gere o input do utilizador, incluindo:
+   - se um botão está a ser pressionado e se estiver, qual (`currentKeyState` e `currentMouseState`, `currentTouchState` no caso de mobile)
+   - se o input de um clique (de mouse ou de toque de tela) está dentro da area de uma opção de texto, como um botão
+
+  ### `ScoreManager.cs`
+  Esta classe gere o score, assim como o high score. Existe um método `LoadHighScore` que carrega o high score de um ficheiro `"hiscore.txt"` quando o jogo é carregado. Também existe o método `SaveHighScore` que armazena o high score quando obtido no mesmo ficheiro através da função `CheckAndUpdateHighScore`.
