@@ -42,11 +42,26 @@ As classes principais deste projeto estão divididas em 3 categorias:
    - uma variavel para verificar se o player está a orbitar o circulo (`PlayerAttached`)
 
 > [!NOTE]
-> `PlayerAttached` é do tipo [event](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/events/). Penso que seria possível substituir esta implementação por uma do tipo [bool](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool), sendo que a maioria dos métodos em que esta variavel é usada podia, também, um bool ser usado num contexto semelhante.
+> `PlayerAttached` é do tipo [event](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/events/). Pensamos que seria possível substituir esta implementação por uma do tipo [bool](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool), sendo que a maioria dos métodos em que esta variavel é usada podia, também, um bool ser usado num contexto semelhante.
 
   Esta classe também apresenta os seus próprios métodos com relevância:
    - `OnPlayerAttached`: verifica se o player está a orbitar o circulo;
    - `HandleCollision`: quando o player se lança para o próximo circulo, este método verifica se o player está na distância de colisão do circulo, aumentando, ou não, o score devidamente;
 
 ### `Player.cs`
-  Uma classe herdada de `Entity.cs` que controla a maior parte dos aspetos do circulo controlado pelo jogador.
+  Uma classe herdada de `Entity.cs` que controla a maior parte dos aspetos do circulo controlado pelo jogador, aprofundando em propriedades relevantes para tal.
+   - o angulo e a velocidade angular (`angle` e `angularVelocity`)
+   - a velocidade do player quando transitando de um circulo para o outro (`speed` e `speedConstant`)
+   - uma variavel que indica se o player está conectado a um circulo (`IsOrbiting`)
+   - o circulo (se estiver conectado a um) a que o player está conectado (`AttachedCircle`)
+   - a tangente do ponto onde o player está quando atirado e a sua trajetoria (`trajectory` e `TangentPoint`)
+
+  Na função `Update`, que corre a cada frame, é verificado se o player está a orbitar um circulo. Se estiver, ele continua a orbitar. Se ele não estiver, ele é lançado mais longe na sua trajetoria.
+
+  ### `GameText.cs`
+  A classe que é responsável por métodos e propriedades de texto. Estas não têm muito de interesse e são padrão para a maioria de aplicações (centrar texto, fonte, etc.)
+
+  > [!NOTE]
+  > Faria bastante sentido esta classe fazer parte da categoria **Managers**, sendo que a classe não faz muito por si, mas gerência uma parte mais geral da aplicação em si.
+
+  ## GameState
